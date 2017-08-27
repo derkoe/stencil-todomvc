@@ -1,6 +1,6 @@
 exports.config = {
 	bundles: [
-		{ components: ['todo-app', 'todo-list'] }
+		{ components: ['todo-app', 'todo-footer', 'todo-list'] }
 	]
 };
 

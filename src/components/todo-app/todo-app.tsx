@@ -18,19 +18,20 @@ export class TodoApp {
 		}
 	}
 
+	@Listen('clearCompleted')
 	private clearCompleted() {
 		this.todos = this.todos.filter(todo => !todo.completed);
 	}
 
 	@Listen('todoToggled')
-	public todoToggled(event: CustomEvent) {
+	todoToggled(event: CustomEvent) {
 		const todo = event.detail as Todo;
 		todo.completed = !todo.completed;
 		this.todos = this.todos.concat([]);
 	}
 
 	@Listen('todoDeleted')
-	public todoDeleted(event: CustomEvent) {
+	todoDeleted(event: CustomEvent) {
 		const todo = event.detail as Todo;
 		const idx = this.todos.indexOf(todo);
 		if (idx >= 0) {
@@ -39,35 +40,6 @@ export class TodoApp {
 				...this.todos.slice(idx + 1),
 			];
 		}
-	}
-
-	private renderTodoCount() {
-		const items = this.todos.filter(todo => !todo.completed).length;
-		return (
-			<span class="todo-count">
-				<strong>{items}</strong> {items > 1 || items < 1 ? "items" : "item"} left
-			</span>
-		);
-	}
-
-	private renderFooter() {
-		return (
-			<footer class="footer">
-				{this.renderTodoCount()}
-				<ul class="filters">
-					<li>
-						<a class="selected" href="#/">All</a>
-					</li>
-					<li>
-						<a href="#/active">Active</a>
-					</li>
-					<li>
-						<a href="#/completed">Completed</a>
-					</li>
-				</ul>
-				<button class="clear-completed" onClick={(ev) => this.clearCompleted()}>Clear completed</button>
-			</footer>
-		);
 	}
 
 	render() {
@@ -79,7 +51,7 @@ export class TodoApp {
 						onKeyUp={event => this.onKeyUp(event)} />
 				</header>
 				<todo-list todos={this.todos}></todo-list>
-				{this.todos.length > 0 ? this.renderFooter() : null}
+				{this.todos.length > 0 ? <todo-footer todos={this.todos}></todo-footer> : null}
 			</section>
 		);
 	}
