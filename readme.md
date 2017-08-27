@@ -19,7 +19,7 @@ Stencil also enables a number of key capabilities on top of Web Components, in p
 
 - [Stack Overflow](http://stackoverflow.com/questions/tagged/stenciljs)
 - [Twitter](http://twitter.com/stenciljs)
-- [GitHb] https://github.com/ionic-team/stencil
+- [GitHub](https://github.com/ionic-team/stencil)
 
 ## Implementation
 

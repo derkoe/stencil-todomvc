@@ -27,7 +27,7 @@ export class TodoList {
 					<div class="view">
 						<input class="toggle" type="checkbox" checked={todo.completed}
 							onChange={event => this.toggle(event, todo)} />
-						<label>{todo.text}</label>
+						<label>{todo.title}</label>
 						<button class="destroy" onClick={event => this.delete(todo)}></button>
 					</div>
 					<input class="edit" value="Create a TodoMVC template" />
