@@ -1,3 +1,7 @@
+import { uuid } from './utils';
 export class Todo {
-	constructor(public title: string, public completed?: boolean) { }
+	id: string;
+	constructor(public title: string, public completed?: boolean) {
+		this.id = uuid();
+	 }
 }
