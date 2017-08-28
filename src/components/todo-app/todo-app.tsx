@@ -9,6 +9,17 @@ const ENTER_KEY = 13;
 export class TodoApp {
 
 	@State() todos: Todo[] = [];
+	@State() filter: string = "/";
+	get filteredTodos(): Todo[] {
+		switch(this.filter) {
+			case "/active": 
+				return this.todos.filter(todo=>!todo.completed)
+			case "/completed":
+				return this.todos.filter(todo=>todo.completed)
+			default:
+				return this.todos;
+		}
+	}
 
 	private onKeyUp(event: KeyboardEvent) {
 		if (event.keyCode == ENTER_KEY) {
@@ -16,6 +27,12 @@ export class TodoApp {
 			this.todos = this.todos.concat(new Todo(input.value));
 			input.value = '';
 		}
+	}
+
+	@Listen('window:hashchange')
+	hashChanged(e:HashChangeEvent) {
+		// VERY "NAIVE WAY" TO EXTRACT HASH FRAGMENT FROM CURR URL
+		this.filter = (e.newURL && e.newURL.split("#")[1]) || "/";
 	}
 
 	@Listen('clearCompleted')
@@ -57,7 +74,7 @@ export class TodoApp {
 					<input class="new-todo" placeholder="What needs to be done?" autoComplete="true"
 						onKeyUp={event => this.onKeyUp(event)} />
 				</header>
-				<todo-list todos={this.todos}></todo-list>
+				<todo-list todos={this.filteredTodos}></todo-list>
 				{this.todos.length > 0 ? <todo-footer todos={this.todos}></todo-footer> : null}
 			</section>
 		);
