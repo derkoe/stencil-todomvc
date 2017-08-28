@@ -8,7 +8,7 @@ const ENTER_KEY = 13;
 })
 export class TodoApp {
 
-	@State() todos: Todo[] = [new Todo("AAAA", true)];
+	@State() todos: Todo[] = [];
 
 	private onKeyUp(event: KeyboardEvent) {
 		if (event.keyCode == ENTER_KEY) {
@@ -26,8 +26,15 @@ export class TodoApp {
 	@Listen('todoToggled')
 	todoToggled(event: CustomEvent) {
 		const todo = event.detail as Todo;
-		todo.completed = !todo.completed;
-		this.todos = this.todos.concat([]);
+		const idx = this.todos.indexOf(todo);
+		this.todos = [
+			...this.todos.slice(0, idx),
+			new Todo(todo.title, !todo.completed),
+			...this.todos.slice(idx + 1),
+		];
+		// TODO the following does not trigger change detection:
+		// todo.completed = !todo.completed;
+		// this.todos = this.todos.concat([]);
 	}
 
 	@Listen('todoDeleted')
