@@ -13,8 +13,11 @@ export class TodoApp {
 	private onKeyUp(event: KeyboardEvent) {
 		if (event.keyCode == ENTER_KEY) {
 			const input = event.target as HTMLInputElement;
-			this.todos = this.todos.concat(new Todo(input.value));
-			input.value = '';
+			const title = input.value.trim();
+			if (title != '') {
+				this.todos = this.todos.concat(new Todo(input.value));
+				input.value = '';
+			}
 		}
 	}
 
@@ -54,7 +57,7 @@ export class TodoApp {
 			<section class="todoapp">
 				<header class="header">
 					<h1>todos</h1>
-					<input class="new-todo" placeholder="What needs to be done?" autoComplete="true"
+					<input class="new-todo" placeholder="What needs to be done?" autoComplete="on" autoFocus
 						onKeyUp={event => this.onKeyUp(event)} />
 				</header>
 				<todo-list todos={this.todos}></todo-list>
