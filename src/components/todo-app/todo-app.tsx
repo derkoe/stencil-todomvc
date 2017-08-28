@@ -75,7 +75,7 @@ export class TodoApp {
 						onKeyUp={event => this.onKeyUp(event)} />
 				</header>
 				<todo-list todos={this.filteredTodos}></todo-list>
-				{this.todos.length > 0 ? <todo-footer todos={this.todos}></todo-footer> : null}
+				{this.todos.length > 0 ? <todo-footer todos={this.todos} curr={this.filter}></todo-footer> : null}
 			</section>
 		);
 	}

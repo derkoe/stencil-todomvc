@@ -7,6 +7,7 @@ import { Todo } from '../../todo';
 export class Footer {
 
 	@Prop() todos: Todo[];
+	@Prop() curr: string;
 
 	@Event() clearCompleted: EventEmitter;
 
@@ -19,19 +20,21 @@ export class Footer {
 		);
 	}
 
+
 	render() {
+		const linkSelected = (hash:string, text:string) => <a href={'#'+hash} class={{'selected':hash===this.curr}} >{text}</a>
 		return (
 			<footer class="footer">
 				{this.renderTodoCount()}
 				<ul class="filters">
 					<li>
-						<a class="selected" href="#/">All</a>
+						{ linkSelected("/","All") }
 					</li>
 					<li>
-						<a href="#/active">Active</a>
+						{ linkSelected("/active","Active") }
 					</li>
 					<li>
-						<a href="#/completed">Completed</a>
+						{ linkSelected("/completed","Completed") }
 					</li>
 				</ul>
 				<button class="clear-completed" onClick={(ev) => this.clearCompleted.emit()}>Clear completed</button>
