@@ -1,4 +1,10 @@
-# Stencil • [TodoMVC](http://todomvc.com)
+# [Stencil](https://stenciljs.com) • [TodoMVC](http://todomvc.com)
+
+[![Build Status](https://travis-ci.org/derkoe/stencil-todomvc.svg?branch=master)](https://travis-ci.org/derkoe/stencil-todomvc) 
+
+Link to **[Stencil TodoMVC appliation](https://derkoe.github.io/stencil-todomvc/)**
+
+---
 
 This is a [TodoMVC](http://todomvc.com) implementation in [Stencil](https://stenciljs.com).
 
@@ -47,7 +53,6 @@ Build the app with:
  
  * There is a [bug with onDoubleClick](https://github.com/ionic-team/stencil/issues/114) in Stencil - so editing is implemented with single click
  * autofocus and autocomplete on the add todo
- * Change detection does not seem to work when only changing "completed"
 
 ## Credit
 

@@ -9,30 +9,15 @@ export class TodoService {
 		return this.save(this.todos.concat(new Todo(title)));
 	}
 
-	// FIXME changing only completed flag does not trigger change detection:
 	edit(todo: Todo): Todo[] {
-		const idx = this.todos.indexOf(todo);
-		if (idx >= 0) {
-			return this.save([
-				...this.todos.slice(0, idx),
-				todo,
-				...this.todos.slice(idx + 1),
-			]);
-		} else {
-			return this.todos;
-		}
+		return this.save(this.todos
+			.map(item => todo.id === item.id ?
+				new Todo(todo.title, todo.completed, todo.id) :
+				item));
 	}
 
 	delete(todo: Todo) {
-		const idx = this.todos.indexOf(todo);
-		if (idx >= 0) {
-			return this.save([
-				...this.todos.slice(0, idx),
-				...this.todos.slice(idx + 1),
-			]);
-		} else {
-			return this.todos;
-		}
+		return this.save(this.todos.filter(entry => entry.id !== todo.id));
 	}
 
 	clearCompleted(): Todo[] {
