@@ -1,11 +1,11 @@
-import { Component, Prop, Event, EventEmitter, State } from '@stencil/core';
+import { Component, Event, EventEmitter, Prop, State } from '@stencil/core';
 import { Todo } from '../../todo';
 
 const ENTER_KEY = 13;
 const ESCAPE_KEY = 27;
 
 @Component({
-	tag: 'todo-item'
+	tag: 'todo-item',
 })
 export class TodoItem {
 	@State() editing: boolean;
@@ -29,9 +29,9 @@ export class TodoItem {
 		// https://facebook.github.io/react/docs/refs-and-the-dom.html
 		const viewDiv = (event.target as HTMLElement).parentElement;
 		if (viewDiv) {
-			let nextSibling = viewDiv.nextElementSibling;
+			const nextSibling = viewDiv.nextElementSibling;
 			if (nextSibling instanceof HTMLInputElement) {
-				let editInput = nextSibling as HTMLInputElement;
+				const editInput = nextSibling as HTMLInputElement;
 				setTimeout(() => editInput.focus(), 0);
 			}
 		}
@@ -51,7 +51,7 @@ export class TodoItem {
 	render() {
 		if (this.todo) {
 			return (
-				<li class={{ "completed": !!this.todo.completed, "editing": this.editing }}>
+				<li class={{ completed: !!this.todo.completed, editing: this.editing }}>
 					<div class="view">
 						<input class="toggle" type="checkbox" checked={this.todo.completed}
 							onChange={event => this.toggle(event)} />

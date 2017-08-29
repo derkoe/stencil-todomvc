@@ -11,18 +11,20 @@
   ],
   "scripts": {
     "prepare": "sd mkdirp www && sd copyDir node_modules/todomvc-common www/todomvc-common && sd copyDir node_modules/todomvc-app-css www/todomvc-app-css",
-    "build": "stencil build",
+    "build": "tslint -p tsconfig.json && stencil build",
     "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server\" ",
     "serve": "stencil-dev-server",
-    "start": "npm run dev"
+    "start": "npm run dev",
+    "lint": "tslint -p tsconfig.json"
   },
   "dependencies": {
+    "@stencil/core": "next",
     "todomvc-app-css": "^2.0.0",
-    "todomvc-common": "^1.0.0",
-    "@stencil/core": "next"
+    "todomvc-common": "^1.0.0"
   },
   "devDependencies": {
     "@stencil/dev-server": "latest",
-    "@stencil/utils": "latest"
+    "@stencil/utils": "latest",
+    "tslint": "^5.7.0"
   }
 }

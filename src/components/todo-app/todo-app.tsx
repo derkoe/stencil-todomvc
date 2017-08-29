@@ -1,21 +1,24 @@
-import { Component, State, Listen } from '@stencil/core';
+import { Component, Listen, State } from '@stencil/core';
 import { Todo } from '../../todo';
+import { TodoService } from '../../todo-service';
 
 const ENTER_KEY = 13;
 
 @Component({
-	tag: 'todo-app'
+	tag: 'todo-app',
 })
 export class TodoApp {
+
+	private todoService = new TodoService();
 
 	@State() todos: Todo[] = [];
 
 	private onKeyUp(event: KeyboardEvent) {
-		if (event.keyCode == ENTER_KEY) {
+		if (event.keyCode === ENTER_KEY) {
 			const input = event.target as HTMLInputElement;
 			const title = input.value.trim();
-			if (title != '') {
-				this.todos = this.todos.concat(new Todo(input.value));
+			if (title !== '') {
+				this.todos = this.todoService.add(input.value);
 				input.value = '';
 			}
 		}
@@ -23,33 +26,17 @@ export class TodoApp {
 
 	@Listen('clearCompleted')
 	private clearCompleted() {
-		this.todos = this.todos.filter(todo => !todo.completed);
+		this.todos = this.todoService.clearCompleted();
 	}
 
 	@Listen('todoToggled')
 	todoToggled(event: CustomEvent) {
-		const todo = event.detail as Todo;
-		const idx = this.todos.indexOf(todo);
-		this.todos = [
-			...this.todos.slice(0, idx),
-			new Todo(todo.title, !todo.completed),
-			...this.todos.slice(idx + 1),
-		];
-		// TODO the following does not trigger change detection:
-		// todo.completed = !todo.completed;
-		// this.todos = this.todos.concat([]);
+		this.todos = this.todoService.toggleCompleted(event.detail as Todo);
 	}
 
 	@Listen('todoDeleted')
 	todoDeleted(event: CustomEvent) {
-		const todo = event.detail as Todo;
-		const idx = this.todos.indexOf(todo);
-		if (idx >= 0) {
-			this.todos = [
-				...this.todos.slice(0, idx),
-				...this.todos.slice(idx + 1),
-			];
-		}
+		this.todos = this.todoService.delete(event.detail as Todo);
 	}
 
 	render() {

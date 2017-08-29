@@ -1,8 +1,8 @@
-import { Component, Prop, EventEmitter, Event } from '@stencil/core';
+import { Component, Event, EventEmitter, Prop } from '@stencil/core';
 import { Todo } from '../../todo';
 
 @Component({
-	tag: 'todo-footer'
+	tag: 'todo-footer',
 })
 export class Footer {
 
@@ -14,7 +14,7 @@ export class Footer {
 		const items = this.todos.filter(todo => !todo.completed).length;
 		return (
 			<span class="todo-count">
-				<strong>{items}</strong> {items > 1 || items < 1 ? "items" : "item"} left
+				<strong>{items}</strong> {items > 1 || items < 1 ? 'items' : 'item'} left
 			</span>
 		);
 	}

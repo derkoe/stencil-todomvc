@@ -1,8 +1,8 @@
-import { Component, Prop, Event, EventEmitter, CssClassMap, State } from '@stencil/core';
+import { Component, CssClassMap, Event, EventEmitter, Prop, State } from '@stencil/core';
 import { Todo } from '../../todo';
 
 @Component({
-	tag: 'todo-list'
+	tag: 'todo-list',
 })
 export class TodoList {
 	@Prop() todos: Todo[];
@@ -16,6 +16,6 @@ export class TodoList {
 					{this.todos.map(todo => <todo-item todo={todo}></todo-item>)}
 				</ul>
 			</section>
-		)
+		);
 	}
 }
