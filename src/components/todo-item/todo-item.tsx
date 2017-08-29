@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Prop, State } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Prop, State } from '@stencil/core';
 import { Todo } from '../../todo';
 
 const ENTER_KEY = 13;
@@ -16,6 +16,8 @@ export class TodoItem {
 	@Event() todoDeleted: EventEmitter;
 
 	@Event() todoEdited: EventEmitter;
+
+	@Element() el: HTMLElement;
 
 	render() {
 		if (this.todo) {
@@ -45,17 +47,10 @@ export class TodoItem {
 	private edit(event: MouseEvent) {
 		this.editing = true;
 
-		// set focus on edit item
-		// TODO check why Stencil does not support refs:
-		// https://facebook.github.io/react/docs/refs-and-the-dom.html
-		const viewDiv = (event.target as HTMLElement).parentElement;
-		if (viewDiv) {
-			const nextSibling = viewDiv.nextElementSibling;
-			if (nextSibling instanceof HTMLInputElement) {
-				const editInput = nextSibling as HTMLInputElement;
-				setTimeout(() => editInput.focus(), 0);
-			}
-		}
+		// set focus on edit item and put cursor to the end
+		const editInput = this.el.getElementsByClassName('edit')[0] as HTMLInputElement;
+		setTimeout(() => editInput.focus(), 0);
+		editInput.selectionStart = editInput.value.length;
 	}
 
 	private onKeyUp(ev: KeyboardEvent) {
