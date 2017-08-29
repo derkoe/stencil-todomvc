@@ -13,7 +13,7 @@ export class TodoList {
 				<input id="toggle-all" class="toggle-all" type="checkbox" />
 				<label htmlFor="toggle-all">Mark all as complete</label>
 				<ul class="todo-list">
-					{this.todos.map(todo => <todo-item todo={todo}></todo-item>)}
+					{this.todos.map(todo => <todo-item todo={todo} completed={todo.completed}></todo-item>)}
 				</ul>
 			</section>
 		);

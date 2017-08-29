@@ -13,6 +13,8 @@ export class TodoItem {
 
 	@Prop() todo: Todo;
 
+	@Prop() completed: boolean;
+
 	@Event() todoDeleted: EventEmitter;
 
 	@Event() todoEdited: EventEmitter;
@@ -22,9 +24,9 @@ export class TodoItem {
 	render() {
 		if (this.todo) {
 			return (
-				<li class={{ completed: this.todo.completed, editing: this.editing }}>
+				<li class={{ completed: this.completed, editing: this.editing }}>
 					<div class="view">
-						<input class="toggle" type="checkbox" checked={this.todo.completed}
+						<input class="toggle" type="checkbox" checked={this.completed}
 							onChange={event => this.toggle(event)} />
 						<label onClick={event => this.edit(event)}>{this.todo.title}</label>
 						<button class="destroy" onClick={event => this.todoDeleted.emit(this.todo)}></button>
@@ -41,6 +43,7 @@ export class TodoItem {
 	private toggle(event: Event) {
 		event.preventDefault();
 		this.todo.completed = !this.todo.completed;
+		this.completed = this.todo.completed;
 		this.todoEdited.emit(this.todo);
 	}
 
