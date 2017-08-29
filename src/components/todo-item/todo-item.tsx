@@ -8,17 +8,38 @@ const ESCAPE_KEY = 27;
 	tag: 'todo-item',
 })
 export class TodoItem {
+
 	@State() editing: boolean;
 
 	@Prop() todo: Todo;
 
-	@Event() todoToggled: EventEmitter;
-
 	@Event() todoDeleted: EventEmitter;
+
+	@Event() todoEdited: EventEmitter;
+
+	render() {
+		if (this.todo) {
+			return (
+				<li class={{ completed: this.todo.completed, editing: this.editing }}>
+					<div class="view">
+						<input class="toggle" type="checkbox" checked={this.todo.completed}
+							onChange={event => this.toggle(event)} />
+						<label onClick={event => this.edit(event)}>{this.todo.title}</label>
+						<button class="destroy" onClick={event => this.todoDeleted.emit(this.todo)}></button>
+					</div>
+					<input class="edit"
+						onBlur={ev => this.doneEdit(ev)}
+						onKeyUp={ev => this.onKeyUp(ev)}
+						value={this.todo.title} />
+				</li>
+			);
+		}
+	}
 
 	private toggle(event: Event) {
 		event.preventDefault();
-		this.todoToggled.emit(this.todo);
+		this.todo.completed = !this.todo.completed;
+		this.todoEdited.emit(this.todo);
 	}
 
 	private edit(event: MouseEvent) {
@@ -46,24 +67,6 @@ export class TodoItem {
 	private doneEdit(ev: UIEvent) {
 		this.editing = false;
 		this.todo.title = (ev.target as HTMLInputElement).value;
-	}
-
-	render() {
-		if (this.todo) {
-			return (
-				<li class={{ completed: !!this.todo.completed, editing: this.editing }}>
-					<div class="view">
-						<input class="toggle" type="checkbox" checked={this.todo.completed}
-							onChange={event => this.toggle(event)} />
-						<label onClick={event => this.edit(event)}>{this.todo.title}</label>
-						<button class="destroy" onClick={event => this.todoDeleted.emit(this.todo)}></button>
-					</div>
-					<input class="edit"
-						onBlur={ev => this.doneEdit(ev)}
-						onKeyUp={ev => this.onKeyUp(ev)}
-						value={this.todo.title} />
-				</li>
-			);
-		}
+		this.todoEdited.emit(this.todo);
 	}
 }

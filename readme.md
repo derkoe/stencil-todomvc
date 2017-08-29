@@ -46,9 +46,8 @@ Build the app with:
 ### Open stuff
  
  * There is a [bug with onDoubleClick](https://github.com/ionic-team/stencil/issues/114) in Stencil - so editing is implemented with single click
- * Routing (filter in footer) is open - there is a [PR](#1) for that
- * Saving/loading from localStorage
  * autofocus and autocomplete on the add todo
+ * Change detection does not seem to work when only changing "completed"
 
 ## Credit
 
