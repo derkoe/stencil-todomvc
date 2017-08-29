@@ -10,29 +10,18 @@ export class TodoService {
 	}
 
 	// FIXME changing only completed flag does not trigger change detection:
-	edit(todo: Todo): Todo[] {
-		const idx = this.todos.indexOf(todo);
-		if (idx >= 0) {
-			return this.save([
-				...this.todos.slice(0, idx),
-				todo,
-				...this.todos.slice(idx + 1),
-			]);
-		} else {
-			return this.todos;
-		}
+	edit(todo: Partial<Todo>): Todo[] {
+		return this.save(this.todos.map(
+			old => old.id === todo.id 
+					? {...old, ...todo}
+					: old 
+		))
 	}
 
-	delete(todo: Todo) {
-		const idx = this.todos.indexOf(todo);
-		if (idx >= 0) {
-			return this.save([
-				...this.todos.slice(0, idx),
-				...this.todos.slice(idx + 1),
-			]);
-		} else {
-			return this.todos;
-		}
+	delete(id: string) {
+		return this.save(this.todos.filter(
+			todo => todo.id !== id
+		))
 	}
 
 	clearCompleted(): Todo[] {
