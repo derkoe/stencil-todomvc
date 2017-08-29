@@ -21,12 +21,19 @@ export class TodoItem {
 		this.todoToggled.emit(this.todo);
 	}
 
-	private edit() {
+	private edit(event: MouseEvent) {
 		this.editing = true;
-		// set focus on edit item - TODO check if there is a better way
-		const input = document.getElementById(this.todo.id);
-		if (input) {
-			setTimeout(() => input.focus(), 10);
+
+		// set focus on edit item
+		// TODO check why Stencil does not support refs:
+		// https://facebook.github.io/react/docs/refs-and-the-dom.html
+		const viewDiv = (event.target as HTMLElement).parentElement;
+		if (viewDiv) {
+			let nextSibling = viewDiv.nextElementSibling;
+			if (nextSibling instanceof HTMLInputElement) {
+				let editInput = nextSibling as HTMLInputElement;
+				setTimeout(() => editInput.focus(), 0);
+			}
 		}
 	}
 
@@ -48,11 +55,10 @@ export class TodoItem {
 					<div class="view">
 						<input class="toggle" type="checkbox" checked={this.todo.completed}
 							onChange={event => this.toggle(event)} />
-						<label onClick={ev => this.edit()}>{this.todo.title}</label>
+						<label onClick={event => this.edit(event)}>{this.todo.title}</label>
 						<button class="destroy" onClick={event => this.todoDeleted.emit(this.todo)}></button>
 					</div>
 					<input class="edit"
-						id={this.todo.id}
 						onBlur={ev => this.doneEdit(ev)}
 						onKeyUp={ev => this.onKeyUp(ev)}
 						value={this.todo.title} />
