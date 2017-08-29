@@ -23,7 +23,32 @@ Stencil also enables a number of key capabilities on top of Web Components, in p
 
 ## Implementation
 
-TODO
+The application is structured in four components:
+ * todo-app - handles all data and represents the whole application
+ * todo-list - shows the list of todos
+ * todo-item - shows the todo item and handles editing and deleting
+ * todo-footer - the footer with the count, filters and "clear completed" action
+
+### Running / Building
+
+Prepare the app (this is only needed once after npm install) with:
+
+    npm run prepare
+
+Run the application with in dev mode (watch is active, opens browser):
+
+    npm run start
+
+Build the app with:
+
+    npm run build
+
+### Open stuff
+ 
+ * There is a [bug with onDoubleClick](https://github.com/ionic-team/stencil/issues/114) in Stencil - so editing is implemented with single click
+ * Routing (filter in footer) is open - there is a [PR](#1) for that
+ * Saving/loading from localStorage
+ * autofocus and autocomplete on the add todo
 
 ## Credit
 
