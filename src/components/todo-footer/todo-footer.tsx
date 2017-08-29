@@ -13,19 +13,17 @@ export class Footer {
 	@Event() clearCompleted: EventEmitter;
 
 	render() {
+		const linkSelected = (hash:TodoFilter, text:string) => 
+				<a href={'#/'+(hash==='all'?'':hash)} 
+					class={{'selected':hash===this.filter}}
+				>{text}</a>
 		return (
 			<footer class="footer">
 				{this.renderTodoCount()}
 				<ul class="filters">
-					<li>
-						<a class={{ selected: this.filter === 'all' }} href="#/">All</a>
-					</li>
-					<li>
-						<a class={{ selected: this.filter === 'active' }} href="#/active">Active</a>
-					</li>
-					<li>
-						<a class={{ selected: this.filter === 'completed' }} href="#/completed">Completed</a>
-					</li>
+					<li>{ linkSelected('all','All') }</li>
+					<li>{ linkSelected('active','Active') }</li>
+					<li>{ linkSelected('completed','Completed') }</li>
 				</ul>
 				<button class="clear-completed" onClick={(ev) => this.clearCompleted.emit()}>Clear completed</button>
 			</footer>
