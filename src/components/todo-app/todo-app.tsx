@@ -12,6 +12,17 @@ export class TodoApp {
 	private todoService = new TodoService();
 
 	@State() todos: Todo[] = [];
+	@State() filter: string = "/";
+	get filteredTodos(): Todo[] {
+		switch(this.filter) {
+			case "/active": 
+				return this.todos.filter(todo=>!todo.completed)
+			case "/completed":
+				return this.todos.filter(todo=>todo.completed)
+			default:
+				return this.todos;
+		}
+	}
 
 	private onKeyUp(event: KeyboardEvent) {
 		if (event.keyCode === ENTER_KEY) {
@@ -22,6 +33,12 @@ export class TodoApp {
 				input.value = '';
 			}
 		}
+	}
+
+	@Listen('window:hashchange')
+	hashChanged(e:HashChangeEvent) {
+		// VERY "NAIVE WAY" TO EXTRACT HASH FRAGMENT FROM CURR URL
+		this.filter = (e.newURL && e.newURL.split("#")[1]) || "/";
 	}
 
 	@Listen('clearCompleted')
@@ -47,8 +64,8 @@ export class TodoApp {
 					<input class="new-todo" placeholder="What needs to be done?" autoComplete="on" autoFocus
 						onKeyUp={event => this.onKeyUp(event)} />
 				</header>
-				<todo-list todos={this.todos}></todo-list>
-				{this.todos.length > 0 ? <todo-footer todos={this.todos}></todo-footer> : null}
+				<todo-list todos={this.filteredTodos}></todo-list>
+				{this.todos.length > 0 ? <todo-footer todos={this.todos} curr={this.filter}></todo-footer> : null}
 			</section>
 		);
 	}
