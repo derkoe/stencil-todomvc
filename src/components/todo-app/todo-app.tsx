@@ -46,12 +46,12 @@ export class TodoApp {
 
 	@Listen('todoDeleted')
 	private todoDeleted(event: CustomEvent) {
-		this.todos = this.todoService.delete(event.detail as Todo);
+		this.todos = this.todoService.delete(event.detail as string);
 	}
 
 	@Listen('todoEdited')
 	private todoEdited(event: CustomEvent) {
-		this.todos = this.todoService.edit(event.detail as Todo);
+		this.todos = this.todoService.edit(event.detail as Partial<Todo>);
 	}
 
 	private onKeyUp(event: KeyboardEvent) {
