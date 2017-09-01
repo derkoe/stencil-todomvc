@@ -38,8 +38,8 @@ export class TodoApp {
 					<input class="new-todo" placeholder="What needs to be done?" autoComplete="on" autoFocus
 						onKeyUp={event => this.onKeyUp(event)} />
 				</header>
-				<todo-list todos={this.filteredTodos}></todo-list>
-				{this.todos.length > 0 ? <todo-footer todos={this.todos} filter={this.filter}></todo-footer> : null}
+				<todo-list todos={this.filteredTodos} />
+				{this.todos.length > 0 ? <todo-footer todos={this.todos} filter={this.filter} /> : null}
 			</section>
 		);
 	}

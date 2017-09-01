@@ -4,7 +4,7 @@ import { Todo, TodoFilter } from '../../todo';
 @Component({
 	tag: 'todo-footer',
 })
-export class Footer {
+export class TodoFooter {
 
 	@Prop() todos: Todo[];
 

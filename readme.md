@@ -51,8 +51,8 @@ Build the app with:
 
 ### Open stuff
  
- * There is a [bug with onDoubleClick](https://github.com/ionic-team/stencil/issues/114) in Stencil - so editing is implemented with single click
  * autofocus and autocomplete on the add todo
+ * run test suite
 
 ## Credit
 
