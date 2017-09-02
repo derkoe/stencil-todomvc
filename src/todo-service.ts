@@ -9,11 +9,21 @@ export class TodoService {
 		return this.save(this.todos.concat(new Todo(title)));
 	}
 
-	edit(todo: Todo): Todo[] {
-		return this.save(this.todos
-			.map(item => todo.id === item.id ?
-				new Todo(todo.title, todo.completed, todo.id) :
-				item));
+	editTitle(todo: Todo, newTitle: string): Todo[] {
+		return this.edit(todo.id, item => {
+			item.title = newTitle;
+			return item;
+		});
+	}
+
+	toggleCompleted(todo: Todo): Todo[] {
+		/* TODO change detection does not work with the following todo has to be recreated
+		return this.edit(todo.id, item => {
+			item.completed = !item.completed;
+			return item;
+		});
+		*/
+		return this.edit(todo.id, item => new Todo(item.title, !item.completed, item.id));
 	}
 
 	delete(todo: Todo) {
@@ -31,10 +41,16 @@ export class TodoService {
 		return this.todos = [];
 	}
 
-	save(todos: Todo[]): Todo[] {
+	private save(todos: Todo[]): Todo[] {
 		if (window.localStorage) {
 			localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
 		}
 		return this.todos = todos;
+	}
+
+	private edit(id: string, change: (todo: Todo) => Todo) {
+		return this.save(
+			this.todos.map(item => id === item.id ? change(item) : item),
+		);
 	}
 }

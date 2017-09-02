@@ -45,13 +45,18 @@ export class TodoApp {
 	}
 
 	@Listen('todoDeleted')
-	private todoDeleted(event: CustomEvent) {
+	private todoDeleted(event: DeleteTodoEvent) {
 		this.todos = this.todoService.delete(event.detail as Todo);
 	}
 
-	@Listen('todoEdited')
-	private todoEdited(event: CustomEvent) {
-		this.todos = this.todoService.edit(event.detail as Todo);
+	@Listen('toggleCompleted')
+	private toggleCompleted(event: ToggleCompletedEvent) {
+		this.todos = this.todoService.toggleCompleted(event.detail);
+	}
+
+	@Listen('editTitle')
+	private editTitle(event: EditTitleEvent) {
+		this.todos = this.todoService.editTitle(event.detail.todo, event.detail.newTitle);
 	}
 
 	private onKeyUp(event: KeyboardEvent) {
@@ -78,4 +83,19 @@ export class TodoApp {
 	private clearCompleted() {
 		this.todos = this.todoService.clearCompleted();
 	}
+}
+
+interface ToggleCompletedEvent {
+	detail: Todo;
+}
+
+interface EditTitleEvent {
+	detail: {
+		todo: Todo;
+		newTitle: string;
+	};
+}
+
+interface DeleteTodoEvent {
+	detail: Todo;
 }

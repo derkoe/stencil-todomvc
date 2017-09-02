@@ -15,7 +15,9 @@ export class TodoItem {
 
 	@Event() todoDeleted: EventEmitter;
 
-	@Event() todoEdited: EventEmitter;
+	@Event() toggleCompleted: EventEmitter;
+
+	@Event() editTitle: EventEmitter;
 
 	@Element() el: HTMLElement;
 
@@ -25,9 +27,9 @@ export class TodoItem {
 				<li class={{ completed: this.todo.completed, editing: this.editing }}>
 					<div class="view">
 						<input class="toggle" type="checkbox" checked={this.todo.completed}
-							onChange={event => this.toggle(event)} />
+							onChange={event => this.toggle()} />
 						<label onDblClick={event => this.edit(event)}
-							onClick={event => this.toggle(event)}>{this.todo.title}</label>
+							onClick={event => this.toggle()}>{this.todo.title}</label>
 						<button class="destroy" onClick={event => this.todoDeleted.emit(this.todo)}></button>
 					</div>
 					<input class="edit"
@@ -39,10 +41,8 @@ export class TodoItem {
 		}
 	}
 
-	private toggle(event: Event) {
-		event.preventDefault();
-		this.todo.completed = !this.todo.completed;
-		this.todoEdited.emit(this.todo);
+	private toggle() {
+		this.toggleCompleted.emit(this.todo);
 	}
 
 	private edit(event: MouseEvent) {
@@ -62,7 +62,7 @@ export class TodoItem {
 
 	private doneEdit(ev: UIEvent) {
 		this.editing = false;
-		this.todo.title = (ev.target as HTMLInputElement).value;
-		this.todoEdited.emit(this.todo);
+		const newTitle = (ev.target as HTMLInputElement).value.trim();
+		this.editTitle.emit({ todo: this.todo, newTitle });
 	}
 }
