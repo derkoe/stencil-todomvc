@@ -8,7 +8,7 @@ export class TodoList {
 	@Prop() todos: Todo[];
 
 	render() {
-		return (
+		return this.todos.length <= 0 ? null : (
 			<section class="main">
 				<input id="toggle-all" class="toggle-all" type="checkbox" />
 				<label htmlFor="toggle-all">Mark all as complete</label>
