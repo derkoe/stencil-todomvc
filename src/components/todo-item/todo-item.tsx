@@ -26,7 +26,8 @@ export class TodoItem {
 					<div class="view">
 						<input class="toggle" type="checkbox" checked={this.todo.completed}
 							onChange={event => this.toggle(event)} />
-						<label onDblClick={event => this.edit(event)}>{this.todo.title}</label>
+						<label onDblClick={event => this.edit(event)}
+							onClick={event => this.toggle(event)}>{this.todo.title}</label>
 						<button class="destroy" onClick={event => this.todoDeleted.emit(this.todo)}></button>
 					</div>
 					<input class="edit"
