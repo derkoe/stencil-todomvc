@@ -10,32 +10,19 @@ export class TodoService {
 	}
 
 	editTitle(todo: Todo, newTitle: string): Todo[] {
-		return this.edit(todo.id, item => {
-			item.title = newTitle;
-			return item;
-		});
+		return this.edit(todo.id, item => ({...item, title: newTitle}));
 	}
 
 	toggleCompleted(todo: Todo): Todo[] {
-		/* TODO change detection does not work with the following todo has to be recreated
-		return this.edit(todo.id, item => {
-			item.completed = !item.completed;
-			return item;
-		});
-		*/
-		return this.edit(todo.id, item => new Todo(item.title, !item.completed, item.id));
+		return this.edit(todo.id, item => ({...item, completed: !item.completed}));
 	}
 
 	toggleAll(completed: boolean): Todo[] {
-		return this.save(this.todos.map(item => new Todo(item.title, completed, item.id)));
+		return this.save(this.todos.map(item => ({ ...item, completed })));
 	}
 
 	delete(todo: Todo) {
-		return this.save(this.todos
-			.filter(entry => entry.id !== todo.id)
-			// TODO change detection does not work when not recreating all items
-			.map(item => new Todo(item.title, item.completed, item.id)),
-		);
+		return this.save(this.todos.filter(entry => entry.id !== todo.id));
 	}
 
 	clearCompleted(): Todo[] {
