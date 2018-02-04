@@ -10,7 +10,7 @@ const ESCAPE_KEY = 27;
 export class TodoList {
 	@Prop() todos: Todo[];
 
-	@State() editing: boolean;
+	@State() editing: string | null;
 
 	@Event() todoDeleted: EventEmitter;
 
@@ -37,11 +37,11 @@ export class TodoList {
 
 	renderTodo(todo: Todo) {
 		return (
-			<li class={{ completed: todo.completed, editing: this.editing }}>
+			<li class={{ completed: todo.completed, editing: todo.id === this.editing }}>
 				<div class="view">
 					<input class="toggle" type="checkbox" checked={todo.completed}
 						onChange={event => this.toggle(todo)} />
-					<label onDblClick={event => this.edit(event)}
+					<label onDblClick={event => this.edit(todo, event)}
 						onClick={event => this.toggle(todo)}>{todo.title}</label>
 					<button class="destroy" onClick={event => this.todoDeleted.emit(todo)}></button>
 				</div>
@@ -65,13 +65,16 @@ export class TodoList {
 		this.toggleAll.emit(!this.allCompleted());
 	}
 
-	private edit(event: MouseEvent) {
-		this.editing = true;
+	private edit(todo: Todo, event: MouseEvent) {
+		this.editing = todo.id;
 
-		// set focus on edit item and put cursor to the end
-		const editInput = this.el.getElementsByClassName('edit')[0] as HTMLInputElement;
-		setTimeout(() => editInput.focus(), 0);
-		editInput.selectionStart = editInput.value.length;
+		setTimeout(() => {
+			// set focus on edit item and put cursor to the end
+			const editInput = this.el.getElementsByClassName('editing')[0]
+				.getElementsByClassName('edit')[0] as HTMLInputElement;
+			editInput.focus();
+			editInput.selectionStart = editInput.value.length;
+		}, 0);
 	}
 
 	private onKeyUp(todo: Todo, ev: KeyboardEvent) {
@@ -81,7 +84,7 @@ export class TodoList {
 	}
 
 	private doneEdit(todo: Todo, ev: UIEvent) {
-		this.editing = false;
+		this.editing = null;
 		const newTitle = (ev.target as HTMLInputElement).value.trim();
 		this.editTitle.emit({ todo, newTitle });
 	}
