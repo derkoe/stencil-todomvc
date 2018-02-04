@@ -13,6 +13,13 @@ export class TodoFooter {
 	@Event() clearCompleted: EventEmitter;
 
 	render() {
+		let clearCompletedButton = null;
+		if (this.todos.some(item => item.completed)) {
+			clearCompletedButton = (
+				<button class="clear-completed" onClick={(ev) => this.clearCompleted.emit()}>Clear completed</button>
+			);
+		}
+
 		return (
 			<footer class="footer">
 				{this.renderTodoCount()}
@@ -27,7 +34,7 @@ export class TodoFooter {
 						<a class={{ selected: this.filter === 'completed' }} href="#/completed">Completed</a>
 					</li>
 				</ul>
-				<button class="clear-completed" onClick={(ev) => this.clearCompleted.emit()}>Clear completed</button>
+				{clearCompletedButton}
 			</footer>
 		);
 	}
