@@ -78,15 +78,21 @@ export class TodoList {
 	}
 
 	private onKeyUp(todo: Todo, ev: KeyboardEvent) {
-		if (ev.keyCode === ENTER_KEY || ev.keyCode === ESCAPE_KEY) {
+		if (ev.keyCode === ENTER_KEY) {
 			this.doneEdit(todo, ev);
+		} else if (ev.keyCode === ESCAPE_KEY) {
+			this.editing = null;
 		}
 	}
 
 	private doneEdit(todo: Todo, ev: UIEvent) {
 		this.editing = null;
 		const newTitle = (ev.target as HTMLInputElement).value.trim();
-		this.editTitle.emit({ todo, newTitle });
+		if (newTitle && newTitle.length > 0) {
+			this.editTitle.emit({ todo, newTitle });
+		} else {
+			this.todoDeleted.emit(todo);
+		}
 	}
 
 }
