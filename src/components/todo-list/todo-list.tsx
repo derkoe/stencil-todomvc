@@ -41,9 +41,8 @@ export class TodoList {
 				<div class="view">
 					<input class="toggle" type="checkbox" checked={todo.completed}
 						onChange={event => this.toggle(todo)} />
-					<label onDblClick={event => this.edit(todo, event)}
-						onClick={event => this.toggle(todo)}>{todo.title}</label>
-					<button class="destroy" onClick={event => this.todoDeleted.emit(todo)}></button>
+					<label onDblClick={event => this.edit(todo, event)}>{todo.title}</label>
+					<button class="destroy" onClick={event => this.deleteTodo(todo)}></button>
 				</div>
 				<input class="edit"
 					onBlur={ev => this.doneEdit(todo, ev)}
@@ -59,6 +58,10 @@ export class TodoList {
 
 	private toggle(todo: Todo) {
 		this.toggleCompleted.emit(todo);
+	}
+
+	private deleteTodo(todo: Todo) {
+		this.todoDeleted.emit(todo);
 	}
 
 	private onToggleAll() {
@@ -91,7 +94,7 @@ export class TodoList {
 		if (newTitle && newTitle.length > 0) {
 			this.editTitle.emit({ todo, newTitle });
 		} else {
-			this.todoDeleted.emit(todo);
+			this.deleteTodo(todo);
 		}
 	}
 
