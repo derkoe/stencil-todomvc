@@ -31,7 +31,11 @@ export class TodoService {
 	}
 
 	delete(todo: Todo) {
-		return this.save(this.todos.filter(entry => entry.id !== todo.id));
+		return this.save(this.todos
+			.filter(entry => entry.id !== todo.id)
+			// TODO change detection does not work when not recreating all items
+			.map(item => new Todo(item.title, item.completed, item.id)),
+		);
 	}
 
 	clearCompleted(): Todo[] {
