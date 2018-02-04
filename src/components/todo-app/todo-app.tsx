@@ -59,6 +59,11 @@ export class TodoApp {
 		this.todos = this.todoService.editTitle(event.detail.todo, event.detail.newTitle);
 	}
 
+	@Listen('toggleAll')
+	private toggleAll(event: ToggleAllEvent) {
+		this.todos = this.todoService.toggleAll(event.detail);
+	}
+
 	private onKeyUp(event: KeyboardEvent) {
 		if (event.keyCode === ENTER_KEY) {
 			const input = event.target as HTMLInputElement;
@@ -98,4 +103,8 @@ interface EditTitleEvent {
 
 interface DeleteTodoEvent {
 	detail: Todo;
+}
+
+interface ToggleAllEvent {
+	detail: boolean;
 }

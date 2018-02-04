@@ -10,7 +10,6 @@
     "www"
   ],
   "scripts": {
-    "prepare": "sd mkdirp www && sd copyDir node_modules/todomvc-common www/todomvc-common && sd copyDir node_modules/todomvc-app-css www/todomvc-app-css",
     "build": "tslint -p tsconfig.json && stencil build",
     "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server\" ",
     "serve": "stencil-dev-server",

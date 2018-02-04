@@ -31,10 +31,6 @@ The application is structured in four components:
 
 ### Running / Building
 
-Prepare the app (this is only needed once after npm install) with:
-
-    npm run prepare
-
 Run the application with in dev mode (watch is active, opens browser):
 
     npm run start
@@ -45,7 +41,6 @@ Build the app with:
 
 ### Open stuff
  
- * autofocus and autocomplete on the add todo
  * run test suite
 
 ## Credit

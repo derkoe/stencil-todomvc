@@ -26,6 +26,10 @@ export class TodoService {
 		return this.edit(todo.id, item => new Todo(item.title, !item.completed, item.id));
 	}
 
+	toggleAll(completed: boolean): Todo[] {
+		return this.save(this.todos.map(item => new Todo(item.title, completed, item.id)));
+	}
+
 	delete(todo: Todo) {
 		return this.save(this.todos.filter(entry => entry.id !== todo.id));
 	}
