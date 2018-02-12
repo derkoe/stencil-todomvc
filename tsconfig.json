@@ -4,6 +4,7 @@
 		"module": "commonjs",
 		"experimentalDecorators": true,
 		"jsx": "preserve",
-		"strict": true
+		"strict": true,
+		"strictPropertyInitialization": false
 	}
 }
