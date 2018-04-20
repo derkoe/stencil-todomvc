@@ -24,6 +24,7 @@
   "devDependencies": {
     "@stencil/dev-server": "latest",
     "@stencil/utils": "latest",
+    "semver": "^5.5.0",
     "tslint": "^5.7.0"
   }
 }
