@@ -1,4 +1,4 @@
-import { Component, CssClassMap, Element, Event, EventEmitter, Prop, State } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Prop, State } from '@stencil/core';
 import { Todo } from '../../todo';
 
 const ENTER_KEY = 13;
