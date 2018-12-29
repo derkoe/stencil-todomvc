@@ -7,6 +7,9 @@ exports.config = {
 		{
 			type: 'www',
 			baseUrl: '/stencil-todomvc'
+		},
+		{
+			type: 'dist'
 		}
 	]
 };
