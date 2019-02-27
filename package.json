@@ -29,6 +29,6 @@
     "@stencil/dev-server": "latest",
     "@stencil/utils": "latest",
     "tslint": "5.13.0",
-    "workbox-build": "3.6.3"
+    "workbox-build": "4.0.0"
   }
 }
