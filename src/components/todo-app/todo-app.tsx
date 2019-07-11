@@ -1,4 +1,4 @@
-import { Component, Listen, State } from '@stencil/core';
+import { Component, h, Listen, State } from '@stencil/core';
 import { Todo, TodoFilter } from '../../todo';
 import { TodoService } from '../../todo-service';
 
@@ -36,7 +36,7 @@ export class TodoApp {
 				<header class="header">
 					<h1>todos</h1>
 					<input class="new-todo" placeholder="What needs to be done?" autoComplete="on" autoFocus
-						onKeyUp={event => this.onKeyUp(event)} />
+						onKeyUp={(event: KeyboardEvent) => this.onKeyUp(event)} />
 				</header>
 				<todo-list todos={this.filteredTodos} />
 				{this.todos.length > 0 ? <todo-footer todos={this.todos} filter={this.filter} /> : null}
@@ -45,22 +45,22 @@ export class TodoApp {
 	}
 
 	@Listen('todoDeleted')
-	private todoDeleted(event: DeleteTodoEvent) {
+	todoDeleted(event: DeleteTodoEvent) {
 		this.todos = this.todoService.delete(event.detail as Todo);
 	}
 
 	@Listen('toggleCompleted')
-	private toggleCompleted(event: ToggleCompletedEvent) {
+	toggleCompleted(event: ToggleCompletedEvent) {
 		this.todos = this.todoService.toggleCompleted(event.detail);
 	}
 
 	@Listen('editTitle')
-	private editTitle(event: EditTitleEvent) {
+	editTitle(event: EditTitleEvent) {
 		this.todos = this.todoService.editTitle(event.detail.todo, event.detail.newTitle);
 	}
 
 	@Listen('toggleAll')
-	private toggleAll(event: ToggleAllEvent) {
+	toggleAll(event: ToggleAllEvent) {
 		this.todos = this.todoService.toggleAll(event.detail);
 	}
 
@@ -75,8 +75,8 @@ export class TodoApp {
 		}
 	}
 
-	@Listen('window:hashchange')
-	private hashChanged(e: HashChangeEvent) {
+	@Listen('hashchange', { target: 'window' })
+	hashChanged(e: HashChangeEvent) {
 		this.updateFilterFromUrl(e.newURL);
 	}
 
@@ -85,7 +85,7 @@ export class TodoApp {
 	}
 
 	@Listen('clearCompleted')
-	private clearCompleted() {
+	clearCompleted() {
 		this.todos = this.todoService.clearCompleted();
 	}
 }

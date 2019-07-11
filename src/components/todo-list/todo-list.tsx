@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Prop, State } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, h, Prop, State } from '@stencil/core';
 import { Todo } from '../../todo';
 
 const ENTER_KEY = 13;
@@ -26,7 +26,7 @@ export class TodoList {
 		return this.todos.length <= 0 ? null : (
 			<section class="main">
 				<input id="toggle-all" class="toggle-all" type="checkbox"
-					onClick={ev => this.onToggleAll()} checked={this.allCompleted()} />
+					onClick={() => this.onToggleAll()} checked={this.allCompleted()} />
 				<label htmlFor="toggle-all">Mark all as complete</label>
 				<ul class="todo-list">
 					{this.todos.map(todo => this.renderTodo(todo))}
@@ -40,9 +40,9 @@ export class TodoList {
 			<li class={{ completed: todo.completed, editing: todo.id === this.editing }}>
 				<div class="view">
 					<input class="toggle" type="checkbox" checked={todo.completed}
-						onChange={event => this.toggle(todo)} />
-					<label onDblClick={event => this.edit(todo, event)}>{todo.title}</label>
-					<button class="destroy" onClick={event => this.deleteTodo(todo)}></button>
+						onChange={() => this.toggle(todo)} />
+					<label onDblClick={() => this.edit(todo)}>{todo.title}</label>
+					<button class="destroy" onClick={() => this.deleteTodo(todo)}></button>
 				</div>
 				<input class="edit"
 					onBlur={ev => this.doneEdit(todo, ev)}
@@ -68,7 +68,7 @@ export class TodoList {
 		this.toggleAll.emit(!this.allCompleted());
 	}
 
-	private edit(todo: Todo, event: MouseEvent) {
+	private edit(todo: Todo) {
 		this.editing = todo.id;
 
 		setTimeout(() => {

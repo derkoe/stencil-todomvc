@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Prop } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Prop } from '@stencil/core';
 import { Todo, TodoFilter } from '../../todo';
 
 @Component({
@@ -16,7 +16,7 @@ export class TodoFooter {
 		let clearCompletedButton = null;
 		if (this.todos.some(item => item.completed)) {
 			clearCompletedButton = (
-				<button class="clear-completed" onClick={(ev) => this.clearCompleted.emit()}>Clear completed</button>
+				<button class="clear-completed" onClick={() => this.clearCompleted.emit()}>Clear completed</button>
 			);
 		}
 

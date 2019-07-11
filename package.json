@@ -7,28 +7,25 @@
   },
   "license": "MIT",
   "main": "dist/index.js",
-  "module": "dist/esm/es5/index.js",
+  "module": "dist/index.mjs",
   "types": "dist/types/components.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "files": [
     "dist/"
   ],
   "scripts": {
-    "build": "tslint -p tsconfig.json && stencil build",
-    "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server\" ",
-    "serve": "stencil-dev-server",
-    "start": "npm run dev",
+    "build": "stencil build",
+    "dev": "stencil build --dev --watch --serve",
+    "start": "stencil build --serve",
     "lint": "tslint -p tsconfig.json"
   },
   "dependencies": {
-    "@stencil/core": "0.18.1",
+    "@stencil/core": "1.1.6",
     "todomvc-app-css": "2.2.0",
     "todomvc-common": "1.0.5"
   },
   "devDependencies": {
-    "@stencil/dev-server": "latest",
-    "@stencil/utils": "latest",
-    "tslint": "5.13.0",
+    "tslint": "^5.18.0",
     "workbox-build": "4.3.1"
   }
 }
