@@ -28,7 +28,7 @@
   "devDependencies": {
     "@stencil/dev-server": "latest",
     "@stencil/utils": "latest",
-    "tslint": "5.13.0",
+    "tslint": "5.18.0",
     "workbox-build": "4.3.1"
   }
 }
