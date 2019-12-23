@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@stencil/core": "1.1.8",
-    "todomvc-app-css": "2.2.0",
+    "todomvc-app-css": "2.3.0",
     "todomvc-common": "1.0.5"
   },
   "devDependencies": {
