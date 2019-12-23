@@ -25,7 +25,7 @@
     "todomvc-common": "1.0.5"
   },
   "devDependencies": {
-    "tslint": "5.18.0",
+    "tslint": "5.20.1",
     "workbox-build": "4.3.1"
   }
 }
