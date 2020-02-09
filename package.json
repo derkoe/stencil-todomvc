@@ -26,6 +26,6 @@
   },
   "devDependencies": {
     "tslint": "5.20.1",
-    "workbox-build": "4.3.1"
+    "workbox-build": "5.0.0"
   }
 }
