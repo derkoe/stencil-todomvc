@@ -20,7 +20,7 @@
     "lint": "tslint -p tsconfig.json"
   },
   "dependencies": {
-    "@stencil/core": "1.12.7",
+    "@stencil/core": "1.13.0",
     "todomvc-app-css": "2.3.0",
     "todomvc-common": "1.0.5"
   },
