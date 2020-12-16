@@ -20,7 +20,7 @@ export class TodoList {
 
 	@Event() toggleAll: EventEmitter;
 
-	@Element() el: HTMLElement;
+	@Element() el: HTMLTodoListElement;
 
 	render() {
 		return this.todos.length <= 0 ? null : (
