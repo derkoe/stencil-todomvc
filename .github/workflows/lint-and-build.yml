@@ -2,19 +2,19 @@ name: Lint and Build
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-    - name: Node 14
-      uses: actions/setup-node@v1
-      with:
-        node-version: 14.x
-    - run: npm ci
-    - run: npm run lint
-    - run: npm run build
+      - uses: actions/checkout@v2
+
+      - name: Lint and Build
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+        run: |
+          npm ci
+          npm run lint
+          npm run build
