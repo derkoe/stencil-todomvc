@@ -10,10 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Lint and Build
-        uses: actions/setup-node@v1
+      - uses: actions/setup-node@v1
         with:
           node-version: 14.x
+
+      - name: Lint and Build
         run: |
           npm ci
           npm run lint
