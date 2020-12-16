@@ -16,7 +16,7 @@ export class TodoFooter {
 		let clearCompletedButton = null;
 		if (this.todos.some(item => item.completed)) {
 			clearCompletedButton = (
-				<button class="clear-completed" onClick={() => this.clearCompleted.emit()}>Clear completed</button>
+				<button class="clear-completed" onClick={this.clearCompleted.emit}>Clear completed</button>
 			);
 		}
 
