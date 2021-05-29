@@ -30,7 +30,7 @@
     "@typescript-eslint/parser": "4.25.0",
     "eslint": "7.27.0",
     "eslint-plugin-react": "7.23.2",
-    "typescript": "4.2.4",
+    "typescript": "4.3.2",
     "workbox-build": "6.1.5"
   }
 }
