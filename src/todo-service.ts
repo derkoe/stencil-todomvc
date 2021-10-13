@@ -30,14 +30,14 @@ export class TodoService {
 	}
 
 	load(): Todo[] {
-		if (window.localStorage) {
+		if (window.localStorage !== undefined) {
 			return this.todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 		}
 		return this.todos = [];
 	}
 
 	private save(todos: Todo[]): Todo[] {
-		if (window.localStorage) {
+		if (window.localStorage !== undefined) {
 			localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
 		}
 		return this.todos = todos;

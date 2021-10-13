@@ -35,7 +35,7 @@ export class TodoList {
 		);
 	}
 
-	renderTodo(todo: Todo) {
+	private renderTodo(todo: Todo) {
 		return (
 			<li class={{ completed: todo.completed, editing: todo.id === this.editing }}>
 				<div class="view">
