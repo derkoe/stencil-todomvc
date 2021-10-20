@@ -28,7 +28,7 @@
     "@stencil/eslint-plugin": "0.3.1",
     "@typescript-eslint/eslint-plugin": "4.33.0",
     "@typescript-eslint/parser": "4.33.0",
-    "eslint": "7.32.0",
+    "eslint": "8.0.1",
     "eslint-plugin-react": "7.26.1",
     "typescript": "4.4.4",
     "workbox-build": "6.3.0"
