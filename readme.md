@@ -1,7 +1,5 @@
 # [Stencil](https://stenciljs.com) • [TodoMVC](http://todomvc.com)
 
-[![Build Status](https://travis-ci.org/derkoe/stencil-todomvc.svg?branch=master)](https://travis-ci.org/derkoe/stencil-todomvc)
-
 Link to **[Stencil TodoMVC appliation](https://derkoe.github.io/stencil-todomvc/)**
 
 ---
@@ -46,4 +44,4 @@ Build the app with:
 
 ## Credit
 
-Created by [Christian Köberl](https://derkoe.github.io)
+Created by [Christian Köberl](https://derkoe.dev)
