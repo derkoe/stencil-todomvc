@@ -2,8 +2,9 @@
 	"parserOptions": {
 		"project": "./tsconfig.json"
 	},
-	"extends": ["plugin:@stencil/recommended"],
+	"extends": ["plugin:@stencil-community/recommended"],
 	"rules": {
-		"@stencil/required-jsdoc": 0
+		"@stencil-community/required-jsdoc": 0,
+		"react/jsx-no-bind": 0
 	}
 }
