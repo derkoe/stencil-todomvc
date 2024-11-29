@@ -28,7 +28,7 @@
     "@stencil-community/eslint-plugin": "0.9.0",
     "@typescript-eslint/eslint-plugin": "8.13.0",
     "@typescript-eslint/parser": "8.13.0",
-    "eslint": "8.57.1",
+    "eslint": "9.16.0",
     "typescript": "5.6.3"
   },
   "engines": {
