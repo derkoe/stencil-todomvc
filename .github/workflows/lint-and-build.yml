@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-      - uses: pnpm/action-setup@v3
+      - uses: pnpm/action-setup@v5
 
       - name: Lint and Build
         run: |
