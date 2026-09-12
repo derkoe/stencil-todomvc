@@ -20,14 +20,14 @@
     "lint": "eslint src/**/*{.ts,.tsx}"
   },
   "dependencies": {
-    "@stencil/core": "4.43.3",
+    "@stencil/core": "4.45.0",
     "todomvc-app-css": "2.4.3",
     "todomvc-common": "1.0.5"
   },
   "devDependencies": {
     "@stencil-community/eslint-plugin": "0.10.0",
-    "@typescript-eslint/eslint-plugin": "8.57.2",
-    "@typescript-eslint/parser": "8.57.2",
+    "@typescript-eslint/eslint-plugin": "8.70.0",
+    "@typescript-eslint/parser": "8.70.0",
     "eslint": "8.57.1",
     "typescript": "5.9.3"
   },
